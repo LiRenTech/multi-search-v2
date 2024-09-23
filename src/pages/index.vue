@@ -1,15 +1,13 @@
 <template>
   <div class="container">
     <n-space vertical>
-      <h1>Multi Search</h1>
-      <n-space>
-        <n-input v-model:value="query" />
-        <n-button @click="search">搜索</n-button>
-      </n-space>
+      <h1>Multi Search 多重搜索工具</h1>
+      <n-input v-model:value="multiLineQueryString" type="textarea" placeholder="每行一个搜索词" />
+      <n-button @click="search">搜索</n-button>
       <n-divider />
       <n-collapse accordion>
         <n-collapse-item title="编程类"><n-transfer v-model:value="selected1" :options="engines1" /></n-collapse-item>
-        <n-collapse-item title="文学类"><n-transfer v-model:value="selected2" :options="engines2" /></n-collapse-item>
+        <n-collapse-item title="文献类"><n-transfer v-model:value="selected2" :options="engines2" /></n-collapse-item>
         <n-collapse-item title="自定义">
           <n-space vertical>
             <n-transfer v-model:value="selected3" :options="engines3" />
@@ -28,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-const query = ref('');
+const multiLineQueryString = ref('');
 const selected1 = ref<string[]>([]);
 const selected2 = ref<string[]>([]);
 const selected3 = ref<string[]>([]);
@@ -36,8 +34,16 @@ const customName = ref('');
 const customUrl = ref('');
 
 const search = () => {
-  for (const url of [...selected1.value, ...selected2.value, ...selected3.value]) {
-    window.open(url.replace('%%%', query.value), '_blank');
+  if (!multiLineQueryString.value.trim()) {
+    alert('搜索词为空，请输入搜索词');
+  }
+  let queryStringList = multiLineQueryString.value.split('\n');
+  queryStringList = queryStringList.filter((query) => query.trim());
+
+  for (const query of queryStringList) {
+    for (const url of [...selected1.value, ...selected2.value, ...selected3.value]) {
+      window.open(url.replace('%%%', query), '_blank');
+    }
   }
 };
 
@@ -128,6 +134,7 @@ const engines3 = useLocalStorage<{ value: string; label: string }[]>('custom-eng
     }
   }
 }
+
 @media screen and (max-width: 430px) {
   .container {
     padding: 20px;
