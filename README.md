@@ -1,18 +1,20 @@
-# Vue 3 + TypeScript + Vite
+# 多重搜索工具
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## 介绍
 
-## Recommended IDE Setup
+很多时候，你想到的东西别人已经做过了，所以搜索引擎是很有用的。但是，搜索引擎的搜索结果往往是有限的，而且不同搜索引擎和网站内容会形成信息孤岛。
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+这个工具可以输入多个搜索词、勾选多个搜索引擎，大批量发送搜索请求，一下子弹窗很多，实现近乎全网搜索。
 
-## Type Support For `.vue` Imports in TS
+## 注意
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+需要让浏览器允许弹窗，否则多重搜索之后只能弹出一个窗口
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## 本地启动
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+```
+pnpm i
+
+pnpm dev
+```
+
